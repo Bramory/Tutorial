@@ -5,14 +5,6 @@
 using namespace std;
 
 
-//int Figure::getCount()const{
-//   return count;
-//}
-//
-//void Figure::setCount(int num){
-//    count = num;
-//}
-
 Figure::Figure(int x_, int y_, char* aColor){
 	x = x_;
 	y = y_;
@@ -72,7 +64,7 @@ void Figure::setColor(char* aColor){
 	strcpy(color, aColor);
 }
 
-void Figure::set_x(char newCoord){
+void Figure::set_x(int newCoord){
 	x = newCoord;
 }
 

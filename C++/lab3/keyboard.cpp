@@ -18,16 +18,16 @@ void SKeyboard(int key, int x, int y){
 
     case GLUT_KEY_LEFT:
         //    if (check[0].get_x() - 1  >= 'A' && check[0].get_y() - 1 >= 0 )
-        check[0].Hit('l');
+        check[0]->Hit('l');
         cout << "LEFT" << endl;
-        cout << "X = " << check[0].get_x() <<  endl;
-        cout << "Y = " << check[0].get_y() <<  endl;
-        cout << "INDEX = " << check[1].getIndex() <<  endl;
+        cout << "X = " << check[0]->get_x() <<  endl;
+        cout << "Y = " << check[0]->get_y() <<  endl;
+        cout << "INDEX = " << check[1]->getIndex() <<  endl;
         break;
 
     case GLUT_KEY_RIGHT:
         //   if (check[0].get_x() + 1 >= 'H' && check[0].get_y() - 1 >= 7 )
-        check[0].Hit('r');
+        check[0]->Hit('r');
 //        cout << "RIGHT" << endl;
 //        cout << "X = " << check[0].get_x() <<  endl;
 //        cout << "Y = " << check[0].get_y() <<  endl;

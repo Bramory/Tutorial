@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
+#include <cstdlib>
 
 #include "figure.h"
 #include "checker.h"
@@ -24,7 +25,7 @@ int x = 0;
 int y = 0;
 
 int sleep = 10;
-Checker *check = new Checker[4];
+Checker *check[4];
 
 void Initialize (){
     glClearColor(1, 1, 1, 1);
@@ -40,9 +41,12 @@ void display(){
 //    if (aCrown.getIndex() > 0)
 //        aCrown.draw();
     glColor3f(0, 1, 0);
-    for (int i = 0; i < check[0].getCount() - 1; i++){ //?????????????????
-        if (check[i].getIndex() > 0) //alive
-            check[i].draw();
+    for (int i = 0; i < check[0]->getCount(); i++){ //?????????????????
+        if (check[i]->getIndex() > 0){ //alive
+            check[i]->draw();
+//            cout << check[i];
+//            system("pause");
+        }
     }
     glutSwapBuffers();
 }
@@ -59,29 +63,33 @@ void MyIdle(){
 
 int main(int argc, char **argv){
 
-    check[0].set_x(0);
-    check[0].set_y(7);
-    check[0].setColor("Red");
+    check[0] = new Checker(0, 7, "Red");
+//    check[0]->set_x(0);
+//    check[0].set_y(7);
+//    check[0].setColor();
 
-    check[1].set_x(2);
-    check[1].set_y(5);
-    check[1].setColor("Blue");
+    check[1] = new Checker(2, 5, "Blue");
+//    check[1].set_x(2);
+//    check[1].set_y(5);
+//    check[1].setColor("Blue");
 
-    check[2] = check[1];
-    check[2].set_x(3);
-    check[2].set_y(2);
+    check[2] = new Checker(3, 2, "Blue");
+//    check[2] = check[1];
+//    check[2].set_x(3);
+//    check[2].set_y(2);
 
-    King aCrown(1, 4, "Yellow");
+    King aCrown(1, 4, "White");
+
+    //cin >> aCrown; // 6 1
+    cout << "\n\n\nNewKing: \n" << aCrown << "\n" << endl;
     check[3] = &aCrown;
+    check[0] = check[0]++;//->operator ++(1);
 
-    cin >> aCrown; // 6 1
-    cout << "\n\n\n" << aCrown << "\n\n\n" << endl;
-
-
-    check[0]++;
-    cout << check[2];
-    cout << "Count = " << check[0].getCount();
-    cout << "CountKing = " << aCrown.getCount();
+    //debug
+    for(int i = 0; i < 4; i ++){
+        cout << " i = " << i;
+        cout << *(check[i]);
+    }
 
 //    cout << "countFIGURE = " << A.getCount() << endl;
 //    cout << "countCHECK = " << check[0].getCount() << endl;

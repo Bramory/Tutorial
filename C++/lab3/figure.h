@@ -11,14 +11,11 @@ class Figure{
 
 		int get_x() const; // print horizontal coordinate
 		int get_y() const; // print  vertical  coordinate
-		void set_x(char);
+		void set_x(int);
 		void set_y(int);
 
 		char* getColor() const;  // print chosen color
 		void  setColor(char*);
-
-//		int  getCount()const;
-//		void setCount(int );
 
 		virtual void makeStep(char direct); // change figure's location
 		void draw()const; // draw on the board

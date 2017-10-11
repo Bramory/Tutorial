@@ -39,11 +39,11 @@ void Checker::draw(void){
 void Checker::Hit(char dir){
     this->makeStep(dir);
     for (int i = 0; i < this->getCount(); i ++){ //test for unique location
-        if (  check[i].get_x() == this->get_x() &&
-              check[i].get_y() == this->get_y() &&
+        if (  check[i]->get_x() == this->get_x() &&
+              check[i]->get_y() == this->get_y() &&
               i != this->getIndex() -1 ) //not the present checker
         {
-            check[i].setIndex(-1); //in global array mark dead-checker
+            check[i]->setIndex(-1); //in global array mark dead-checker
             cout << "HIT!" << endl;
             this->makeStep(dir); // jump over the checker
             break; //all done
@@ -57,6 +57,7 @@ ostream& operator << (ostream &s, Checker &obj){
     cout << "Y = " << obj.get_y() << endl;
     cout << "Color = " << obj.getColor() << endl;
     cout << "Index = " << obj.getIndex() << endl;
+    cout << "Count = " << obj.getCount() << endl << endl;
     return s;
 }
 
@@ -83,6 +84,51 @@ istream& operator >> (istream &s, Checker &obj){
     return s;
 }
 
+//operators for King
+
+King& King::operator =(const King& right){
+    //self-assignment test
+    if (this == &right) {
+        return *this;
+    }
+    x = right.get_x();
+    y = right.get_y();
+    this->setColor(right.getColor());
+    index = right.getIndex();
+    return *this;
+}
+
+//ostream& operator << (ostream &s, King &obj){
+//    cout << "X = " << obj.get_x() << endl;
+//    cout << "Y = " << obj.get_y() << endl;
+//    cout << "Color = " << obj.getColor() << endl;
+//    cout << "Index = " << obj.getIndex() << endl;
+//    return s;
+//}
+//
+//istream& operator >> (istream &s, King &obj){
+//    int x_, y_, index_;
+//    char* color_ = new char[10];// = new char[10];   ????
+//    cout << "Please, set parameters for King:" << endl;
+//    cout << "X = ";
+//    cin >> x_;
+//    obj.set_x(x_);
+//
+//    cout << "Y = ";
+//    cin >> y_;
+//    obj.set_y(y_);
+//
+////    cout << "Index = ";
+////    cin >> index_;
+////    obj.set_index(index_);
+//    cout << "Color = ";
+//    cin >> color_;
+//    obj.setColor(color_);
+//
+//    cout << "END!"<< endl;
+//    return s;
+//}
+
 Checker& Checker::operator =(const Checker& right){
     //self-assignment test
     if (this == &right) {
@@ -96,11 +142,11 @@ Checker& Checker::operator =(const Checker& right){
 }
 
 //Convert Checker -> King
-Checker& Checker::operator ++ (int){
-    King NewCrown;
+King * Checker::operator ++ (int){
+    King *ptr = new King(x, y, color);
     //cout << King << endl; ???
-    Checker *ptr = &NewCrown;
-    return *ptr;
+    //Checker *ptr = &NewCrown;
+    return ptr;
 }
 
 //Checker Checker::operator / (Checker const &rhs){

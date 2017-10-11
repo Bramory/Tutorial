@@ -4,6 +4,7 @@
 #include <iostream>
 #include "figure.h"
 
+class King;
 
 class Checker : public Figure{
         static int amount;
@@ -19,15 +20,16 @@ class Checker : public Figure{
 		int getCount()const;
 		int getIndex()const;
 		void setIndex(int);
-        void draw(void);
+        virtual void draw(void);
         void Hit(char);
 
         friend std::ostream & operator << (std::ostream &s, Checker &obj);
-        friend std::istream & operator >>  (std::istream &s, Checker &obj);
-        Checker& operator ++ (int);
+        friend std::istream & operator >> (std::istream &s, Checker &obj);
+        King* operator ++ (int);
         Checker& operator =(const Checker& right);
         Checker operator / (Checker const &rhs);
 };
+
 class King : public Checker{
         int index;
     public:
@@ -36,6 +38,10 @@ class King : public Checker{
         virtual ~King();
         King(const King& other);
         void draw(void);
+
+        King& operator =(const King& right);
+//        friend std::ostream & operator << (std::ostream &s, King &obj);
+//        friend std::istream & operator >> (std::istream &s, King &obj);
 };
 
 

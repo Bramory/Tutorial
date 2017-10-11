@@ -21,6 +21,6 @@ extern int y;
 
 //for graphics
 extern int sleep;
-extern Checker *check;
+extern Checker *check[4];
 
 #endif // CONST_H_INCLUDED
