@@ -142,19 +142,19 @@ Checker& Checker::operator =(const Checker& right){
 }
 
 //Convert Checker -> King
-King * Checker::operator ++ (int){
+King *Checker::operator ++ (int){
     King *ptr = new King(x, y, color);
-    //cout << King << endl; ???
-    //Checker *ptr = &NewCrown;
+    ptr->setIndex( this->getIndex() );
+    cout << "Index King'a = " << ptr->getIndex() << endl;
+    amount--;
+    cout << "countKing = " << ptr->getCount() << endl;
     return ptr;
 }
 
 //Checker Checker::operator / (Checker const &rhs){
-//    return *this;
+//    return rhs;
 //}
 
-
-//replacement function ??!!
 void King::draw(void){
     chooseColor(this);
     int x0 = x * CELL_WIDTH  + CELL_WIDTH/2; // center of the cell

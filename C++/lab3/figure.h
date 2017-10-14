@@ -2,7 +2,7 @@
 #define _FIGURE_H_
 
 class Figure{
-        static int count;
+        //static int count;
 	public:
 		Figure (int x_, int y_, char* aColor); // constructor
 		Figure (const Figure &);				// copy constr

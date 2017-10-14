@@ -8,6 +8,7 @@ class King;
 
 class Checker : public Figure{
         static int amount;
+    protected:
         int index;
     public:
         //constructors
@@ -26,17 +27,16 @@ class Checker : public Figure{
         friend std::ostream & operator << (std::ostream &s, Checker &obj);
         friend std::istream & operator >> (std::istream &s, Checker &obj);
         King* operator ++ (int);
-        Checker& operator =(const Checker& right);
-        Checker operator / (Checker const &rhs);
+        Checker& operator = (const Checker& right);
+        Checker  operator / (Checker const &rhs);
 };
 
 class King : public Checker{
-        int index;
     public:
         King(char x, int y, char* aColor): Checker(x, y, aColor){}
         King() : Checker(){}
         virtual ~King();
-        King(const King& other);
+        King(const King& other);//:Checker(other){}
         void draw(void);
 
         King& operator =(const King& right);

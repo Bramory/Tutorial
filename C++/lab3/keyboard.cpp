@@ -36,6 +36,7 @@ void SKeyboard(int key, int x, int y){
         break;
 
     case GLUT_KEY_UP:
+        check[0] = (*check[0])++;//->operator ++(0); // ++
         break;
 
     case GLUT_KEY_DOWN:

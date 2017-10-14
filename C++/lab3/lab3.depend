@@ -109,7 +109,7 @@
 	"const.h"
 	"draw.h"
 
-1507730144 source:d:\c++\tutorial\c++\lab3\checker.cpp
+1507892303 source:d:\c++\tutorial\c++\lab3\checker.cpp
 	<GL/glut.h>
 	<cstdio>
 	<cstring>
@@ -119,18 +119,18 @@
 	"const.h"
 	"draw.h"
 
-1507729451 d:\c++\tutorial\c++\lab3\checker.h
+1507891921 d:\c++\tutorial\c++\lab3\checker.h
 	<iostream>
 	"figure.h"
 
-1507636011 d:\c++\tutorial\c++\lab3\figure.h
+1507888622 d:\c++\tutorial\c++\lab3\figure.h
 
 1507724667 d:\c++\tutorial\c++\lab3\const.h
 	"checker.h"
 
 1506108248 d:\c++\tutorial\c++\lab3\draw.h
 
-1506329970 source:d:\c++\tutorial\c++\lab3\draw.cpp
+1507891429 source:d:\c++\tutorial\c++\lab3\draw.cpp
 	<GL/glut.h>
 	<string.h>
 	<cmath>
@@ -145,7 +145,7 @@
 	<iostream>
 	"figure.h"
 
-1507724711 source:d:\c++\tutorial\c++\lab3\keyboard.cpp
+1507892294 source:d:\c++\tutorial\c++\lab3\keyboard.cpp
 	<GL/glut.h>
 	<iostream>
 	"keyboard.h"
@@ -154,10 +154,11 @@
 
 1505838942 d:\c++\tutorial\c++\lab3\keyboard.h
 
-1507729240 source:d:\c++\tutorial\c++\lab3\main.cpp
+1507891735 source:d:\c++\tutorial\c++\lab3\main.cpp
 	<GL/glut.h>
 	<iostream>
 	<cmath>
+	<cstdlib>
 	"figure.h"
 	"checker.h"
 	"keyboard.h"
