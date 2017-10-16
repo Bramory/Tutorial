@@ -5,6 +5,6 @@ void renderBitmapString(float x, float y, void *font, char *string);
 void drawBoard(void);
 void drawCircle(float x, float y, float r, int amountSegments);
 void chooseColor (Checker *Check);
-
+void swap(int *a, int *b);
 #endif // DRAW_H_INCLUDED
 

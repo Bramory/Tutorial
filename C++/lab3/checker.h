@@ -22,26 +22,16 @@ class Checker : public Figure{
 		int getIndex()const;
 		void setIndex(int);
         virtual void draw(void);
-        void Hit(char);
+        virtual void move(int dx, int dy);
+        virtual int Hit(int dx, int dy);
+        int isEnemy(int enemyIn);
+        int isBusyPlace(int x, int y);
 
         friend std::ostream & operator << (std::ostream &s, Checker &obj);
         friend std::istream & operator >> (std::istream &s, Checker &obj);
         King* operator ++ (int);
         Checker& operator = (const Checker& right);
-        Checker  operator / (Checker const &rhs);
-};
-
-class King : public Checker{
-    public:
-        King(char x, int y, char* aColor): Checker(x, y, aColor){}
-        King() : Checker(){}
-        virtual ~King();
-        King(const King& other);//:Checker(other){}
-        void draw(void);
-
-        King& operator =(const King& right);
-//        friend std::ostream & operator << (std::ostream &s, King &obj);
-//        friend std::istream & operator >> (std::istream &s, King &obj);
+        void operator -- (int);
 };
 
 

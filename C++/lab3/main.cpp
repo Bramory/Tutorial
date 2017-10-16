@@ -1,13 +1,16 @@
 #include <GL/glut.h>
+#include <windows.h>
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
 
 #include "figure.h"
 #include "checker.h"
+#include "king.h"
 #include "keyboard.h"
 #include "const.h"
 #include "draw.h"
+#include "mouse.h"
 using namespace std;
 
 int Checker::amount;
@@ -15,15 +18,19 @@ int Checker::amount;
 int N = 8;
 int x_position = 950;
 int y_position = 0;
-int width;
-int height;
+int width  = 400; //glutGet(GLUT_SCREEN_WIDTH);
+int height = 400; //glutGet(GLUT_SCREEN_HEIGHT) * 0.91;
 
-//for mouse coordinate
 int x = 0;
 int y = 0;
+float CELL_WIDTH  = width /N;
+float CELL_HEIGHT = height/N;
+float checkRadius = CELL_WIDTH*2/5; //radius
+int activeCheck = -1;
+int priority = 1;
 
-int sleep = 10;
-Checker *check[4];
+int sleep = 1000;
+Checker *check[24];
 
 void Initialize (){
     glClearColor(1, 1, 1, 1);
@@ -34,9 +41,8 @@ void display(){
     glClear(GL_COLOR_BUFFER_BIT);
 
     drawBoard();
-    glColor3f(0, 1, 0);
-    for (int i = 0; i < check[0]->getCount(); i++){ //?????????????????
-        if (check[i]->getIndex() > 0){ //alive
+    for (int i = 0; i < check[0]->getCount(); i++){ //
+        if (check[i]->getIndex() > 0){ //alive //perevirka
             check[i]->draw();
         }
     }
@@ -44,8 +50,8 @@ void display(){
 }
 
 void MyIdle(){
-//    glutPostRedisplay();
-    //Sleep(sleep);
+    glutPostRedisplay();
+    Sleep(sleep);
 }
 
  void timer(int a){
@@ -53,19 +59,38 @@ void MyIdle(){
     glutTimerFunc(50, timer, 0);
  }
 
+
+ void initCheck(void){
+    //Red Command
+    int attrib0 = 0, attrib1 = 1;
+    int it = 0;
+    for (int y = 0; y < 3; y++){
+        for (int x = 0; x < N; x++){
+            if ( ((y*N + x) & 1) == attrib1){ //even row => odd coordinate
+                check[it++] = new Checker(x, y, "Red");
+            }
+            if ( x == N-1 && (N & 1) == 0 ) // the last square in a row have odd index (N == not even)
+                swap(&attrib1, &attrib0); //odd row => even coordinate
+        }
+    }
+    //Blue Command
+    for (int y = N - 3; y < N; y++){
+        for (int x = 0; x < N; x++){
+            if ( ((y*N + x) & 1) == attrib1){ //even row => odd coordinate
+                check[it++] = new Checker(x, y, "Blue");
+            }
+            if ( x == N-1 && (N & 1) == 0 ) // the last square in a row have odd index (N == not even)
+            swap(&attrib1, &attrib0); //odd row => even coordinate
+        }
+    }
+ }
+
 int main(int argc, char **argv){
 
-    check[0] = new Checker(0, 7, "Red");
-    check[1] = new Checker(2, 5, "Blue");
-    check[2] = new Checker(3, 2, "Blue");
-    King aCrown(1, 4, "White");
-
-    cin >> aCrown; // 6 1
-    //cout << "\n\n\nNewKing: \n" << aCrown << "\n" << endl;
-    check[3] = &aCrown;
+    initCheck();
 
     //debug
-    for(int i = 0; i < 4; i ++){
+    for(int i = 0; i < check[0]->getCount(); i ++){
         cout << " i = " << i << endl;
         cout << *(check[i]);
     }
@@ -74,8 +99,6 @@ int main(int argc, char **argv){
     //Initialization
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    width  = 400;//glutGet(GLUT_SCREEN_WIDTH);
-    height = 400;//glutGet(GLUT_SCREEN_HEIGHT) * 0.91;
     glutInitWindowSize(width, height);
     glutInitWindowPosition(x_position, y_position);
     glutCreateWindow("Checkers");
@@ -86,6 +109,9 @@ int main(int argc, char **argv){
     glutTimerFunc(500, timer, 0);
     glutKeyboardFunc(Keyboard);
     glutSpecialFunc(SKeyboard);
+//    glutPassiveMotionFunc(MouseMove);
+//    glutMotionFunc(MousePressedMove);
+    glutMouseFunc(MousePressed);
     glutMainLoop();
 
     return 0;

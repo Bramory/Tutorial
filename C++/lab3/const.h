@@ -8,8 +8,8 @@ extern int x_position;
 extern int y_position;
 extern int width;
 extern int height;
-#define CELL_WIDTH  (width /N)
-#define CELL_HEIGHT (height/N)
+extern float CELL_WIDTH;
+extern float CELL_HEIGHT;
 
 //for random filling
 extern int MIN_VALUE;
@@ -21,6 +21,10 @@ extern int y;
 
 //for graphics
 extern int sleep;
-extern Checker *check[4];
+extern Checker *check[24];
+extern float checkRadius;
+extern int activeCheck;
+extern int priority;
+
 
 #endif // CONST_H_INCLUDED

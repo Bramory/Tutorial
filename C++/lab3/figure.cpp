@@ -44,7 +44,7 @@ char* Figure::getColor()const{
 	return color;
 }
 
-void Figure::makeStep(char direct){
+void Figure::move(char direct){
 	if (direct == 'l'){
 		y --;
 		x --;

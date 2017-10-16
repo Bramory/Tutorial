@@ -1,11 +1,11 @@
 #include <GL/glut.h>
-#include <cstdio>
-#include <cstring>
-#include <cmath>
-#include <iostream>
+#include <cmath>    //sqrt, pow
+#include <iostream> //io
+#include <cstdlib> //itoa
 #include "checker.h"
 #include "const.h"
 #include "draw.h"
+#include "king.h" // for CHECKER -> KING
 using namespace std;
 
 int Checker::getCount()const{
@@ -32,23 +32,103 @@ void Checker::draw(void){
     chooseColor(this);
     int x0 = x * CELL_WIDTH  + CELL_WIDTH/2;
     int y0 = y * CELL_HEIGHT + CELL_HEIGHT/2;
-    int r = CELL_WIDTH*2/5; //radius
-    drawCircle( x0, y0, r,  15);
+    drawCircle( x0, y0, checkRadius,  20);
+
+    //debug index
+    char *string = new char[10];
+    itoa (this->getIndex(), string, 10);
+    glColor3f(1, 1, 1);
+    renderBitmapString(x0, y0, GLUT_BITMAP_9_BY_15, string);
+    delete[]string;
 }
 
-void Checker::Hit(char dir){
-    this->makeStep(dir);
+//return index [1...N] > 0
+//otherwise 0
+int Checker::isBusyPlace(int x, int y){
     for (int i = 0; i < this->getCount(); i ++){ //test for unique location
-        if (  check[i]->get_x() == this->get_x() &&
-              check[i]->get_y() == this->get_y() &&
-              i != this->getIndex() -1 ) //not the present checker
-        {
-            check[i]->setIndex(-1); //in global array mark dead-checker
-            cout << "HIT!" << endl;
-            this->makeStep(dir); // jump over the checker
-            break; //all done
+        if (check[i]->getIndex() > 0) //alive
+        if (check[i]->get_x() == x &&
+            check[i]->get_y() == y   )
+            return check[i]->getIndex();
+    }
+    return 0; //it's empty place
+}
+
+void Checker::move(int dx, int dy){
+
+    cout << "CHECKER" << endl;
+    cout << "dx = " << dx << endl;
+    cout << "dy = " << dy << endl;
+
+    if ( isBusyPlace(this->get_x() + dx, this->get_y() + dy ) )
+        return;
+
+    if ( abs(dx) != abs(dy) ) //step into the White Square
+        return;
+
+    if(this->getIndex() > this->getCount()/2){ //Player1 in the BOTTOM
+        ///left up                 ///right up
+        if ( (dx == -1  && dy == -1) || (dx == 1 && dy == -1)) {
+            y += dy;
+            x += dx;
+            cout << "MOVE" << endl;
+        if (this->get_y() == 0)
+            check[this->getIndex()-1] = (*this)++;
         }
     }
+    else{
+        ///left down             ///right down
+        if ( (dx == -1 && dy == 1) || (dx == 1 && dy == 1)){
+            y += dy;
+            x += dx;
+            cout << "MOVE" << endl;
+            if (this->get_y() == N-1)
+                check[this->getIndex()-1] = (*this)++;
+        }
+    }
+
+    ///Hit at any direction
+    if ( abs(dx) == 2  && abs(dy) == 2 ){
+        if (this->Hit(dx, dy) == 1){
+            y += dy;
+            x += dx;
+            ///transform to the KING
+            if ((this->getIndex() >  this->getCount()/2 && this->get_y() == 0) ||// Bottom Player go Up){
+                (this->getIndex() <= this->getCount()/2 && this->get_y() == N-1) )// Upper Player go Down
+                check[this->getIndex()-1] = (*this)++;
+        }
+    }
+}
+
+//return 1 if it is enemy
+//otherwise 0
+int Checker::isEnemy(int enemyIn){
+    int enemyGroup = -1;
+    int myGroup = -1;
+
+    if( this->getIndex() <= this->getCount()/2 )
+        myGroup = 1;
+    if( enemyIn <= this->getCount()/2 )
+        enemyGroup = 1;
+
+    bool result = (myGroup != enemyGroup);
+    cout << (result ? "ENEMY" : "ALLY") << endl;
+    return result;
+}
+
+int Checker::Hit(int dx, int dy){
+    //cout << "HIT" << endl;
+    int checkExist = isBusyPlace(this->get_x() + dx/2, this->get_y() + dy/2 );
+    if (!checkExist)
+        return -1;
+    if ( this->isEnemy(checkExist) ){ //can't beat our ally
+        cout <<"checkExist = " << checkExist << endl;
+        if ( check[checkExist-1]->getIndex() > 0){ //alive
+            (*check[checkExist-1])--; // -1 = index and iterator difference
+            return 1; //has beaten
+        }
+    }
+    return -1; //can't beat
 }
 
 //operators
@@ -62,7 +142,7 @@ ostream& operator << (ostream &s, Checker &obj){
 }
 
 istream& operator >> (istream &s, Checker &obj){
-    int x_, y_, index_;
+    int x_, y_ ;
     char* color_ = new char[10];// = new char[10];   ????
     cout << "Please, set parameters for checker:" << endl;
     cout << "X = ";
@@ -73,9 +153,6 @@ istream& operator >> (istream &s, Checker &obj){
     cin >> y_;
     obj.set_y(y_);
 
-//    cout << "Index = ";
-//    cin >> index_;
-//    obj.set_index(index_);
     cout << "Color = ";
     cin >> color_;
     obj.setColor(color_);
@@ -84,50 +161,6 @@ istream& operator >> (istream &s, Checker &obj){
     return s;
 }
 
-//operators for King
-
-King& King::operator =(const King& right){
-    //self-assignment test
-    if (this == &right) {
-        return *this;
-    }
-    x = right.get_x();
-    y = right.get_y();
-    this->setColor(right.getColor());
-    index = right.getIndex();
-    return *this;
-}
-
-//ostream& operator << (ostream &s, King &obj){
-//    cout << "X = " << obj.get_x() << endl;
-//    cout << "Y = " << obj.get_y() << endl;
-//    cout << "Color = " << obj.getColor() << endl;
-//    cout << "Index = " << obj.getIndex() << endl;
-//    return s;
-//}
-//
-//istream& operator >> (istream &s, King &obj){
-//    int x_, y_, index_;
-//    char* color_ = new char[10];// = new char[10];   ????
-//    cout << "Please, set parameters for King:" << endl;
-//    cout << "X = ";
-//    cin >> x_;
-//    obj.set_x(x_);
-//
-//    cout << "Y = ";
-//    cin >> y_;
-//    obj.set_y(y_);
-//
-////    cout << "Index = ";
-////    cin >> index_;
-////    obj.set_index(index_);
-//    cout << "Color = ";
-//    cin >> color_;
-//    obj.setColor(color_);
-//
-//    cout << "END!"<< endl;
-//    return s;
-//}
 
 Checker& Checker::operator =(const Checker& right){
     //self-assignment test
@@ -141,38 +174,7 @@ Checker& Checker::operator =(const Checker& right){
     return *this;
 }
 
-//Convert Checker -> King
-King *Checker::operator ++ (int){
-    King *ptr = new King(x, y, color);
-    ptr->setIndex( this->getIndex() );
-    cout << "Index King'a = " << ptr->getIndex() << endl;
-    amount--;
-    cout << "countKing = " << ptr->getCount() << endl;
-    return ptr;
-}
-
-//Checker Checker::operator / (Checker const &rhs){
-//    return rhs;
-//}
-
-void King::draw(void){
-    chooseColor(this);
-    int x0 = x * CELL_WIDTH  + CELL_WIDTH/2; // center of the cell
-    int y0 = y * CELL_HEIGHT + CELL_HEIGHT/2;
-
-    //glColor3f(1, 0, 0);
-    glBegin(GL_TRIANGLE_FAN);
-    glVertex2f(x0-15, y0-10);
-    glVertex2f(x0, y0-20);
-    glVertex2f(x0+15, y0-10);
-    glVertex2f(x0+10, y0+10);
-    glVertex2f(x0-10, y0+10);
-    glEnd();
-
-    glColor3f(1, 1, 0);
-    renderBitmapString(x0, y0, GLUT_BITMAP_HELVETICA_18, "KING");
-}
-
-King::~King(){
-    //dtor
+void Checker::operator -- (int){
+    this->setIndex(-1); //in global array mark dead-checker
+    cout << "HIT!" << endl;
 }

@@ -13,8 +13,8 @@ void renderBitmapString(float x, float y, void *font, char *string){
   char *c;
   int aLength = strlen(string);
   int i;
-  for (i = 0; i < aLength; i++){
-        x -= 4; //for every digit
+  for (i = 0; i < aLength; i++){ //align-center
+        x -= 4; //for every char
   }
   glRasterPos2f(x, y);
   for (c = string; *c != '\0'; c++){
@@ -40,7 +40,7 @@ void drawBoard(void){
 
             if ( x == N-1 && (N & 1) == 0 )
                 swap(&col1, &col2);
-            glRecti(x    * CELL_WIDTH +1, y    * CELL_HEIGHT, // change this DEFINE
+            glRecti(x    * CELL_WIDTH +1, y    * CELL_HEIGHT,
                    (x+1) * CELL_WIDTH,   (y+1) * CELL_HEIGHT);
         }
     }
@@ -59,6 +59,10 @@ void drawCircle(float x, float y, float r, int amountSegments){
 }
 
 void chooseColor (Checker *Check){
+    if (activeCheck == Check->getIndex() ){
+        glColor3f(0, 1, 0);
+        return;
+    }
     char *aColor = Check->getColor();
     if (strcmp("White", aColor) == 0){
          glColor3f(1, 1, 1);

@@ -17,7 +17,7 @@ class Figure{
 		char* getColor() const;  // print chosen color
 		void  setColor(char*);
 
-		virtual void makeStep(char direct); // change figure's location
+		virtual void move(char direct); // change figure's location
 		void draw()const; // draw on the board
 
 	protected:
