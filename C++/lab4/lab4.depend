@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1509097862 source:d:\c++\tutorial\c++\lab4\stack.cpp
+
+1509099497 source:d:\c++\tutorial\c++\lab4\main.cpp
+	<iostream>
+	"stack.h"
+
+1509099788 d:\c++\tutorial\c++\lab4\stack.h
+

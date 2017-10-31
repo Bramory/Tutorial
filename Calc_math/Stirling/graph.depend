@@ -31,3 +31,35 @@
 
 1507527472 d:\c++\tutorial\calc_math\lab3\calc.h
 
+1507560418 source:d:\c++\tutorial\calc_math\stirling\calc.cpp
+	<cmath>
+	<iostream>
+	<stdio.h>
+	"calc.h"
+	"const.h"
+
+1507527472 d:\c++\tutorial\calc_math\stirling\calc.h
+
+1507529760 d:\c++\tutorial\calc_math\stirling\const.h
+
+1507529760 source:d:\c++\tutorial\calc_math\stirling\draw.cpp
+	<cmath>
+	"cstring"
+	"draw.h"
+	"const.h"
+
+1507526184 d:\c++\tutorial\calc_math\stirling\draw.h
+	<GL/glut.h>
+	"draw.h"
+	"const.h"
+
+1507529854 source:d:\c++\tutorial\calc_math\stirling\main.cpp
+	<GL/glut.h>
+	<cmath>
+	<iostream>
+	<stdio.h>
+	<cstdlib>
+	"calc.h"
+	"const.h"
+	"draw.h"
+

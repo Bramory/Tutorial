@@ -169,7 +169,7 @@
 	"draw.h"
 	"mouse.h"
 
-1508163097 source:d:\c++\tutorial\c++\lab3\mouse.cpp
+1508163328 source:d:\c++\tutorial\c++\lab3\mouse.cpp
 	<GL/glut.h>
 	<cstdlib>
 	<stdio.h>
