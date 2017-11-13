@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1510598531 source:d:\c++\tutorial\calc_math\approximate\least_squares\main.cpp
+	<GL/glut.h>
+	<cstdlib>
+	<iostream>
+	<iomanip>
+	<cmath>
+	<ctime>
+	"const.h"
+	"draw.h"
+	"calc.h"
+
+1510595879 d:\c++\tutorial\calc_math\approximate\least_squares\const.h
+
+1510598075 d:\c++\tutorial\calc_math\approximate\least_squares\draw.h
+
+1510598127 source:d:\c++\tutorial\calc_math\approximate\least_squares\draw.cpp
+	<GL/glut.h>
+	<cmath>
+	<cstring>
+	"draw.h"
+	"calc.h"
+	"const.h"
+
+1510598514 source:d:\c++\tutorial\calc_math\approximate\least_squares\calc.cpp
+	<cmath>
+	"calc.h"
+	"const.h"
+
+1510597192 d:\c++\tutorial\calc_math\approximate\least_squares\calc.h
+

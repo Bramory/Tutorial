@@ -14,11 +14,13 @@ int main()
     valarray<int> array2(5);
 
     cout << "Первый массив: ";
-    for(int i = 0; i < array1.size(); i++) {
-        cout << (array1[i] = rand() % 10) << " ";
+    for(int i = 0; i < array1.size()-1; i++) {
+        cout << (array1[i] = i) << " ";
     }
+    cout << (array1[array1.size()-1] = -1);
 
-    array2 = rand() % 10; // всем элементам массива array2 присвоили случайное значение
+
+    array2 = rand() % 6; // всем элементам массива array2 присвоили случайное значение
     cout << "\nВторой массив: ";
     for(int i = 0; i < array2.size(); i++) {
         cout << array2[i] << " ";
@@ -31,6 +33,13 @@ int main()
     for(int i = 0; i < res.size(); i++) {
         cout << res[i] << " ";
     }
+
+     cout << "\nSum arr2     "<< endl;
+    cout << array2.sum() << endl;
+     cout << "\nmax arr1     "<< endl;
+    cout << array1.max() << endl;
+     cout << "\nmin arr1     "<< endl;
+    cout << array1.min() << endl;
 
     return 0;
 }

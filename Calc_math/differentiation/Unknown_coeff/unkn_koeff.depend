@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1509956837 source:d:\c++\tutorial\calc_math\unknown_koeff\main.cpp
+	<iostream>
+	<iomanip>
+	<cstdio>
+	<cstdlib>
+	<cmath>
+

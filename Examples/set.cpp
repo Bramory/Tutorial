@@ -5,6 +5,7 @@
 using namespace std;
 int main()
 {
+    setlocale(LC_CTYPE, "rus");
     set<char> mySet; // объ€вили пустое множество
 
     // добавл€ем элементы в множество

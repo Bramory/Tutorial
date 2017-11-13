@@ -1,6 +1,7 @@
 ///шаблон класса Stack
 #include <cassert> // для assert
 #include <iostream>
+#include <stack>
 #include <iomanip> // для setw
 
 #include "stack.h"

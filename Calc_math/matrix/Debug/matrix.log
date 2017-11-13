@@ -1,1 +1,0 @@
-﻿D:\Visual\Common7\IDE\VC\VCTargets\Platforms\Win32\PlatformToolsets\v141\Toolset.targets(34,5): error MSB8036: не удалось найти Windows SDK версии 8.1. Установите нужную версию Windows SDK или измените версию SDK на страницах свойств проекта либо щелкнув правой кнопкой мыши решение и выбрав "Изменить целевую платформу решения".

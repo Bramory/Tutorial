@@ -36,7 +36,7 @@ void Checker::draw(void){
 
     //debug index
     char *string = new char[10];
-    itoa (this->getIndex(), string, 10);
+    itoa(this->getIndex(), string, 10);
     glColor3f(1, 1, 1);
     renderBitmapString(x0, y0, GLUT_BITMAP_9_BY_15, string);
     delete[]string;
