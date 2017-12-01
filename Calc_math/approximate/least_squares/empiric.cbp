@@ -41,6 +41,10 @@
 		<Unit filename="const.h" />
 		<Unit filename="draw.cpp" />
 		<Unit filename="draw.h" />
+		<Unit filename="keyboard.cpp" />
+		<Unit filename="keyboard.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

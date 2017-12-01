@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1510559742 source:d:\c++\tutorial\calc_math\integration\gauss\main.cpp
-	<iostream>
-	<iomanip>
-	<cstdio>
-	<cstdlib>
-	<cmath>
-

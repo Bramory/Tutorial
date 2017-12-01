@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1511456580 source:d:\c++\tutorial\calc_math\integration\monte_carlo\calc.cpp
+	<cmath>
+	"calc.h"
+	"const.h"
+
+1510858783 d:\c++\tutorial\calc_math\integration\monte_carlo\calc.h
+
+1510856645 d:\c++\tutorial\calc_math\integration\monte_carlo\const.h
+	"calc.h"
+
+1510913559 source:d:\c++\tutorial\calc_math\integration\monte_carlo\draw.cpp
+	<GL/glut.h>
+	<cmath>
+	<cstring>
+	"draw.h"
+	"calc.h"
+	"const.h"
+
+1510598075 d:\c++\tutorial\calc_math\integration\monte_carlo\draw.h
+
+1510860739 source:d:\c++\tutorial\calc_math\integration\monte_carlo\keyboard.cpp
+	<cstdlib>
+	<GL/glut.h>
+	"keyboard.h"
+	"const.h"
+
+1510659989 d:\c++\tutorial\calc_math\integration\monte_carlo\keyboard.h
+
+1511456606 source:d:\c++\tutorial\calc_math\integration\monte_carlo\main.cpp
+	<GL/glut.h>
+	<cstdlib>
+	<iostream>
+	<iomanip>
+	<cmath>
+	<ctime>
+	"keyboard.h"
+	"const.h"
+	"draw.h"
+	"calc.h"
+

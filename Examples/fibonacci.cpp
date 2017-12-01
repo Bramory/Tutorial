@@ -20,9 +20,12 @@ long double fibb(int n){
 }
 
 int main(){
-    int n = 100;
-    for (int i = 0; i < n; i++)
-    cout << "Fib num #" << i << " = " << fibb(i) << endl;
+    int n = 10, sum = 0;
+    cout << "Enter amount of months: ";
+    cin >> n;
+    for (int i = 2; i <= n+2; i++)
+    	cout << "Rabbits in #" << i << " = " << fibb(i) << endl;
 
+ 	cout << endl;
 return 0;
 }

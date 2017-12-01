@@ -42,12 +42,16 @@ int main(){
     Animal*p_a[3];
     Animal a;
     Cat c("white");
+//    c.~Cat();   /// first uncomment
     Dog d("Doberman");
-    p_a[0] = &a;// Вказівник об’єкту базового класу Animal
-    p_a[1] = &c;// Вказівник об’єкту похідного класу Cat
-    p_a[2] = &d;// Вказівник об’єкту похідного класу Dog
-    for (int i = 0; i < 3; i++) {
-        p_a[i]->speak();
-    }
+//    Cat c2("Red"); /// second uncomment
+    c.speak(); // WTF Windows is doing!
+
+//    p_a[0] = &a;// Вказівник об’єкту базового класу Animal
+//    p_a[1] = &c;// Вказівник об’єкту похідного класу Cat
+//    p_a[2] = &d;// Вказівник об’єкту похідного класу Dog
+//    for (int i = 0; i < 3; i++) {
+//        p_a[i]->speak();
+//    }
 return 0;
 }

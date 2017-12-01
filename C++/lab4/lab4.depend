@@ -6,14 +6,16 @@
 	<iomanip>
 	"stack.h"
 
-1510338655 source:d:\c++\tutorial\c++\lab4\main.cpp
+1511463829 source:d:\c++\tutorial\c++\lab4\main.cpp
 	<iostream>
 	<cstdlib>
 	<stack>
 	<algorithm>
+	<iterator>
 	<vector>
 	<ctime>
 	<string>
+	<list>
 
 1509096188 d:\c++\tutorial\c++\lab4\stack.h
 

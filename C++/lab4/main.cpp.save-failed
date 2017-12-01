@@ -1,0 +1,104 @@
+#include <iostream>
+#include <cstdlib>
+#include <stack>
+#include <algorithm>
+#include <iterator>
+#include <vector>
+#include <ctime>
+#include <string>
+#include <list>
+using namespace std;
+
+//return element from [a ... b]
+//template <typename T>
+int randFromRange (int min, int max){
+    return rand() % (max-min+1) + min;
+}
+
+//template <typename T>
+class Card{
+    int rang;
+    char suit;
+public:
+    Card(){}
+    ~Card(){}
+    inline int getRang(void){ return rang; }
+    inline char getSuit(void)const{ return suit;}
+    inline void setRang(int r){ rang = r;}
+    inline void setSuit(char m){ suit = m;}
+    ostream & operator << (ostream &s){
+        //        switch(rang)){
+//            case 11: tmp_rang = "J";
+//            break;
+//            case 12: tmp_rang = "Q";
+//            break;
+//            case 13: tmp_rang = "K";
+//            break;
+//            case 14: tmp_rang = "A";
+//            break;
+//            default: tmp_rang = rang + 48;
+//            break;
+//    }
+        return (s << this->getSuit() << "," << this->getRang() );
+    }
+};
+
+int main(){
+    srand(time(0));
+    const int N = 36;
+    vector <Card> deck;
+    deck.reserve(N+16);
+
+    cout << "CAPACITY = " << deck.capacity() << endl;
+    cout << "SIZE = " << deck.size() << endl;
+
+    for(int i = 3; i < 7; i++){ //suit
+        for(int j = 2; j < 15; j++){
+            Card newCard;
+            newCard.setSuit(i);
+            newCard.setRang(j); //48
+//            cout << i << " ";
+//            cout << j << endl;
+            deck.push_back(newCard);
+        }
+    }
+
+    //shuffle deck of cards
+    for(int i = 0; i < deck.size(); i++){
+        int in = randFromRange(0, deck.size()-1);
+        swap(deck[i], deck[in] );
+    }
+
+    stack <Card> deck_s;
+    for(int i = 0; i < deck.size(); i++){
+        deck_s.push(deck[i]);
+        cout << i << ") " << deck[i].getSuit() << "," << deck[i].getRang() << endl;
+    }
+    cout << "STACK SIZE = " << deck_s.size() << endl;
+    deck.clear();
+    deck.shrink_to_fit();
+    list <Card> cards1;
+    for(int i = 0; i < 6; i++){
+        cards1.push_back( deck_s.top() );
+        deck_s.pop();
+    }
+
+    cout << "Player 1 have:" << endl;
+    for(auto i = cards1(begin); i != cards.end(); i++){
+        cout << i << " ";
+    }
+
+    //sort(cards1.begin(), cards1.end());
+//    for (list<Card>::iterator l_it = cards1.begin(); l_it != cards1.end(); l_it++){
+//        cout << l_it << '\t';
+//    }
+
+
+//    cout << "Stack s1: " << endl;
+//    for(int elem = s1.top(), j = 0; j < s1.size(); elem--, j++ ){
+//        cout << elem << " " << endl;
+//    }
+
+    system("pause");
+    return 0;
+}

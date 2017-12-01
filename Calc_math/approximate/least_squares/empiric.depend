@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1510598531 source:d:\c++\tutorial\calc_math\approximate\least_squares\main.cpp
+1510670637 source:d:\c++\tutorial\calc_math\approximate\least_squares\main.cpp
 	<GL/glut.h>
 	<cstdlib>
 	<iostream>
 	<iomanip>
 	<cmath>
 	<ctime>
+	"keyboard.h"
 	"const.h"
 	"draw.h"
 	"calc.h"
@@ -22,10 +23,17 @@
 	"calc.h"
 	"const.h"
 
-1510598514 source:d:\c++\tutorial\calc_math\approximate\least_squares\calc.cpp
+1510670439 source:d:\c++\tutorial\calc_math\approximate\least_squares\calc.cpp
 	<cmath>
 	"calc.h"
 	"const.h"
 
 1510597192 d:\c++\tutorial\calc_math\approximate\least_squares\calc.h
+
+1510660084 source:d:\c++\tutorial\calc_math\approximate\least_squares\keyboard.cpp
+	<cstdlib>
+	<GL/glut.h>
+	"keyboard.h"
+
+1510659989 d:\c++\tutorial\calc_math\approximate\least_squares\keyboard.h
 

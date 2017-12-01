@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1511562234 source:d:\c++\tutorial\c++\lab4_pair\main.cpp
+	<iostream>
+	<cstdlib>
+	<stack>
+	<algorithm>
+	<iterator>
+	<vector>
+	<ctime>
+	<string>
+	<list>
+	<assert.h>
+	"tools.h"
+
+1511562170 d:\c++\tutorial\c++\lab4_pair\tools.h
+

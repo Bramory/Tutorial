@@ -3,7 +3,7 @@
 #include "const.h"
 
 //define global
-const int N = 10;
+const int N = 4;
 const int y_size = 3; //order of function
 float x_t[N], y[N];
 float coeff[y_size]; // coefficients
@@ -32,7 +32,7 @@ float sigmaB(float x[], int n, int k, int l){
     for(int i = 0; i < n; i ++){
         sum += pow(x[i], k+l);
     }
-return sum;
+    return sum;
 }
 
 float sigmaC(float x[], float y[], int n, int k){
@@ -40,5 +40,5 @@ float sigmaC(float x[], float y[], int n, int k){
     for(int i = 0; i < n; i ++){
          sum += pow(x[i], k) * y[i];
     }
-return sum;
+    return sum;
 }

@@ -19,10 +19,9 @@ float sigmaC(float X, float x0, int n){
 }
 
 int main() {
-	int N = 5;
-	int h = 1;
+	int N = 5, h = 1;
 	float first = 2;
-
+    system("color 78");
     cout << "Enter point X:" << endl;
     float x_pt = 5.2;
 	cin >> x_pt;
