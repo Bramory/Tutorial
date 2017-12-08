@@ -98,11 +98,11 @@ int main(){
     stack <Card> deck_s;
     for(size_t i = 0; i < deck_v.size(); i++){
         deck_s.push( make_pair(deck_v[i].first, deck_v[i].second));
-//        cout << i << ") "
-//        << deck_v[i].first
-//        << deck_v[i].second
-//        ///<< deck_v[i].getSuit()  * 13 + deck_v[i].getRang()
-//        << endl;
+        cout << i << ") "
+        << deck_v[i].first
+        << deck_v[i].second
+        //<< deck_v[i].getSuit()  * 13 + deck_v[i].getRang()
+        << endl;
     }
     ///destruct vector
     deck_v.clear();
@@ -123,6 +123,7 @@ int main(){
 
     try{
         p_list.sort( obj_cmp ); /// or func_cmp
+        //if (unsort)
         throw -1;
     }
     catch(...){
