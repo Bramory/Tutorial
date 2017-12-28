@@ -12,7 +12,7 @@ class King : public Checker{
         virtual void draw(void);
         virtual int move(int dx, int dy);
         virtual int Hit(int dx, int dy);
-        int possibleMoves(void);
+        virtual int possibleMoves(void);
 
         King& operator =(const King& right);
 };

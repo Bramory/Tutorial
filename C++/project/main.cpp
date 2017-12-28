@@ -12,6 +12,7 @@
 #include "const.h"
 #include "draw.h"
 #include "mouse.h"
+#include "rules.h"
 using namespace std;
 
 int Checker::amount;
@@ -30,29 +31,42 @@ float checkRadius = CELL_WIDTH*2/5; //radius
 int activeCheck = -1;
 int priority = -1;
 
-int sleep = 1000;
+int sleep = 30;
 Checker *check[24];
+
+const int RED_TEAM = 1;
+const int BLUE_TEAM = -1;
 
 void Initialize (){
     glClearColor(1, 1, 1, 1);
     glOrtho(0, width, height, 0, -1, 1);
 }
 
+
 void display(){
     glClear(GL_COLOR_BUFFER_BIT);
 
-    drawBoard();
-    for (int i = 0; i < check[0]->getCount(); i++){ //
-        if (check[i]->getIndex() > 0){ //alive
-            check[i]->draw();
-        }
+    int r = teamCount(RED_TEAM);
+    int b = teamCount(BLUE_TEAM);
+
+    if(r > 0 && b > 0){
+        drawBoard();
+        drawCheckers();
     }
+
+    if(r == 0)
+        Winner(BLUE_TEAM);
+
+    if (b == 0)
+        Winner(RED_TEAM);
+
     glutSwapBuffers();
 }
 
 void MyIdle(){
     glutPostRedisplay();
     Sleep(sleep);
+    //glutSetWindowTitle("");
 }
 
  void timer(int a){
@@ -60,30 +74,6 @@ void MyIdle(){
     glutTimerFunc(100, timer, 0);
  }
 
- void initCheck(void){
-    //Red Command
-    int attrib0 = 0, attrib1 = 1;
-    int it = 0;
-    for (int y = 0; y < 3; y++){
-        for (int x = 0; x < N; x++){
-            if ( ((y*N + x) & 1) == attrib1){ //even row => odd coordinate
-                check[it++] = new Checker(x, y, "Red");
-            }
-            if ( x == N-1 && (N & 1) == 0 ) // the last square in a row have odd index (N == not even)
-                swap(&attrib1, &attrib0); //odd row => even coordinate
-        }
-    }
-    //Blue Command
-    for (int y = N - 3; y < N; y++){
-        for (int x = 0; x < N; x++){
-            if ( ((y*N + x) & 1) == attrib1){ //even row => odd coordinate
-                check[it++] = new Checker(x, y, "Blue");
-            }
-            if ( x == N-1 && (N & 1) == 0 ) // the last square in a row have odd index (N == not even)
-            swap(&attrib1, &attrib0); //odd row => even coordinate
-        }
-    }
- }
 
 int main(int argc, char **argv){
 
@@ -113,6 +103,7 @@ int main(int argc, char **argv){
 //    glutPassiveMotionFunc(MouseMove);
 //    glutMotionFunc(MousePressedMove);
     glutMouseFunc(MousePressed);
+    glutIdleFunc(MyIdle);
     glutMainLoop();
 
     return 0;

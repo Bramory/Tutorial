@@ -65,12 +65,12 @@ void Checker::draw(void){
 
     //*******************************************************************************************************
     //debug index
-    int aSize = 10;
-    char *string = new char[aSize];
-    itoa(this->getIndex(), string);
-    glColor3f(1, 1, 1);
-    renderBitmapString(x0, y0, GLUT_BITMAP_9_BY_15, string);
-    delete[]string;
+//    int aSize = 10;
+//    char *string = new char[aSize];
+//    itoa(this->getIndex(), string);
+//    glColor3f(1, 1, 1);
+//    renderBitmapString(x0, y0, GLUT_BITMAP_9_BY_15, string);
+//    delete[]string;
 }
 
 //return index [1...24] > 0
@@ -88,6 +88,7 @@ int isBusyPlace(int x, int y){
 //only MOVE return 1
 //There HIT return 2
 //wrong step       0
+//smth impossible -1
 int Checker::move(int dx, int dy){
 
 //    cout << "CHECKER" << endl;
@@ -109,17 +110,19 @@ int Checker::move(int dx, int dy){
         // bottom player reach "Top" - convert Checker -> King
         if (this->get_y() == 0)
             check[this->getIndex()-1] = (*this)++;
+        return 1; //move is made
         }
     }
-    else{
+    else{ //Player2 in the TOP
         ///left down             ///right down
         if ( (dx == -1 && dy == 1) || (dx == 1 && dy == 1)){
             y += dy;
             x += dx;
-            cout << "MOVE" << endl;
+//            cout << "MOVE" << endl;
             // upper player reach "Bottom" - convert Checker -> King
             if (this->get_y() == N-1)
                 check[this->getIndex()-1] = (*this)++;
+            return 1; //move is made
         }
     }
 
@@ -135,12 +138,12 @@ int Checker::move(int dx, int dy){
             return 2;
         }
     }
-    return 1;
+return -1;//tupi4ok
 }
 
 //return 1 if it's enemy
 //it's ally = 0
-//otherwise -1
+//otherwise -1 (empty space)
 int Checker::isEnemy(int enemyIn){
     if(enemyIn < 1 || enemyIn > 24)
         return -1;
@@ -183,7 +186,7 @@ int Checker::Hit(int dx, int dy){
 ///no moves for hitting opponent -1
 int Checker::possibleMoves(void){
         // left'n'up
-        cout << "myPosition: " << this->get_x() << " " << this->get_y() << endl;
+//        cout << "myPosition: " << this->get_x() << " " << this->get_y() << endl;
 
         if( (((this->get_x()-2) >= 0) && ((this->get_y()-2) >= 0))  &&
             !isBusyPlace(this->get_x()-2, this->get_y()-2) &&
@@ -261,5 +264,5 @@ Checker& Checker::operator =(const Checker& right){
 
 void Checker::operator -- (int){
     this->setIndex(-1); //in global array mark dead-checker
-    cout << "HIT!" << endl;
+//    cout << "HIT!" << endl;
 }

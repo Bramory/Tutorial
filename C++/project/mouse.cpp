@@ -3,10 +3,10 @@
 #include <stdio.h>
 #include <cmath>
 #include <iostream>
-#include "const.h"
 
-#define RED_TEAM 1
-#define BLUE_TEAM -1
+#include "king.h"
+#include "const.h"
+#include "rules.h"
 
 //return index of Checker [1..24] when we click on it
 //otherwise 0
@@ -17,13 +17,17 @@ int searchChecker(int x, int y){
                                 pow(y - (check[i]->get_y() * CELL_HEIGHT + CELL_HEIGHT/2), 2));
 //            std::cout << "dist" << dist << std::endl;
 //            std::cout << "checkRadius" << checkRadius << std::endl;
+            //click on it
             if( dist <= checkRadius ){
                 if (activeCheck != check[i]->getIndex()){
-                    activeCheck = check[i]->getIndex(); //Change Active
+                    //our choice from the mandatory list or list is empty
+                    if( 1 == checkMandatoryTaking(check[i]->getIndex()) )
+                        activeCheck = check[i]->getIndex(); //Change ActiveChecker
                 }
                 else
                     activeCheck = -1; //OFF Active
-                std::cout << "ACTIVE == " << activeCheck << std::endl;
+//                std::cout << "ACTIVE == " << activeCheck << std::endl;
+
                 //we found unique checker
                 return activeCheck;
             }
@@ -38,9 +42,11 @@ void MousePressed(int button, int state, int x, int y){
     if (state == down )
         switch(button){
             case GLUT_LEFT_BUTTON:
+                system("cls");
                 foundIn = searchChecker(x, y);
                 std::cout <<"Priority = " << (priority == 1 ? "RED_TEAM" : "BLUE_TEAM") << std::endl; /////????
-                //std::cout <<"foundIn = " << foundIn << std::endl; /////????
+                std::cout <<"foundIn = " << foundIn << std::endl; /////????
+                std::cout << "ACTIVE == " << activeCheck << std::endl;
                 if ((activeCheck >  12 && activeCheck <= 24  && priority == BLUE_TEAM) || // -1
                     (activeCheck <= 12 && activeCheck >= 1   && priority == RED_TEAM)   ) //  1
                     //make step in empty place with activeChecker
@@ -85,6 +91,27 @@ void MousePressed(int button, int state, int x, int y){
                             std::cout <<"Priority CHANGE = " << priority << std::endl; /////????
                         }
                     }
+                    break;
+        case GLUT_RIGHT_BUTTON:
+            foundIn = searchChecker(x, y);
+            if(foundIn > 0 )
+                (*check[activeCheck-1])--;
+            else if (y < height/2)
+                    for (int i = 0; i < 12; i++){ //for all checkers
+                      (*check[i])--;
+                    }
+                else
+                    for (int i = 12; i < 24; i++){ //for all checkers
+                      (*check[i])--;
+                    }
+
+            break;
+
+        case GLUT_MIDDLE_BUTTON:
+            foundIn = searchChecker(x, y);
+            if(foundIn > 0 )
+                check[activeCheck-1] = (*check[activeCheck-1])++;
+            break;
         }
 }
 

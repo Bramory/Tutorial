@@ -15,8 +15,7 @@ double const M_PI = 3.141592653589793238;
 void renderBitmapString(float x, float y, void *font, char *string){
   char *c;
   int aLength = strlen(string);
-  int i;
-  for (i = 0; i < aLength; i++){ //align-center
+  for (int i = 0; i < aLength; i++){ //align-center
         x -= 4; //for every char
   }
   glRasterPos2f(x, y);
@@ -51,15 +50,8 @@ void drawBoard(void){
 
 
 void drawCircle(float x, float y, float r, int amountSegments){
-    //int _r, _g, _b;
-//    _r = rand() % 2;
-//    _g = rand() % 2;
-//    _b = rand() % 2;
     glBegin(GL_TRIANGLE_FAN);
     for(int i = 0; i < amountSegments; i++){
-//        _r = rand() % 2;
-//        _g = rand() % 2;
-//        _b = rand() % 2;
         float angle = 2.0 * M_PI * (float)(i) / (float)amountSegments;
         float dx = r * cosf(angle);
         float dy = r * sinf(angle);
@@ -67,6 +59,12 @@ void drawCircle(float x, float y, float r, int amountSegments){
         glColor3f(0.1,0.1,0.1);
     }
     glEnd();
+}
+
+void drawCheckers(void){
+    for (int i = 0; i < check[0]->getCount(); i++)
+        if (check[i]->getIndex() > 0) //alive
+            check[i]->draw();
 }
 
 void chooseColor (Checker *Check){

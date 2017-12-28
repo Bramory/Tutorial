@@ -26,7 +26,7 @@ class Checker : public Figure{
         virtual int Hit(int dx, int dy);
         int isEnemy(int enemyIn);
 
-        int possibleMoves(void);
+        virtual int possibleMoves(void);
 
         friend std::ostream & operator << (std::ostream &s, Checker &obj);
         friend std::istream & operator >> (std::istream &s, Checker &obj);
