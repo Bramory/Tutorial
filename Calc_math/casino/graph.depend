@@ -1,0 +1,32 @@
+# depslib dependency file v1.0
+1516207339 source:d:\c++\tutorial\calc_math\casino\calc.cpp
+	<cmath>
+	<iostream>
+	<stdio.h>
+	"calc.h"
+	"const.h"
+
+1507523872 d:\c++\tutorial\calc_math\casino\calc.h
+
+1516208406 d:\c++\tutorial\calc_math\casino\const.h
+
+1516212401 source:d:\c++\tutorial\calc_math\casino\draw.cpp
+	<GL/glut.h>
+	<cmath>
+	<cstring>
+	"draw.h"
+	"const.h"
+
+1510603759 d:\c++\tutorial\calc_math\casino\draw.h
+
+1516212667 source:d:\c++\tutorial\calc_math\casino\main.cpp
+	<GL/glut.h>
+	<cmath>
+	<iostream>
+	<vector>
+	<cstdlib>
+	<ctime>
+	"calc.h"
+	"const.h"
+	"draw.h"
+
