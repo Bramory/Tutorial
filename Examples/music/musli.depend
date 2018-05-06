@@ -1,7 +1,0 @@
-# depslib dependency file v1.0
-1514452263 source:c:\users\probook\desktop\Новая папка\musli\music.cpp
-	<iostream>
-	<cmath>
-	<cstdlib>
-	<vector>
-

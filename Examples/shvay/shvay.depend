@@ -1,9 +1,0 @@
-# depslib dependency file v1.0
-1508530763 source:d:\c++\tutorial\examples\shvay.cpp
-	<iostream>
-	<fstream>
-	<iterator>
-	<algorithm>
-	<map>
-	<string>
-
