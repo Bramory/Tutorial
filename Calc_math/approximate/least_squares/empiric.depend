@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1510670637 source:d:\c++\tutorial\calc_math\approximate\least_squares\main.cpp
+1510670760 source:d:\c++\tutorial\calc_math\approximate\least_squares\main.cpp
 	<GL/glut.h>
 	<cstdlib>
 	<iostream>

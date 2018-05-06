@@ -21,6 +21,11 @@ float random_float(float min, float max) {
 	return rand() * (max - min)/RAND_MAX + min;
 }
 
+///integral from 0 to 1 looks nicely
+double XX (double x){
+return pow(x, x);
+}
+
 const int pts = 300;
 int pts_inside = 0;
 Point pts_ptr[pts];

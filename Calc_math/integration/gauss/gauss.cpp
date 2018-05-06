@@ -4,6 +4,16 @@
 #include <cstdlib>
 using namespace std;
 
+/// x may be bigger than 1,
+/// we take a look on the integer line: 1, 4, 9, 16, 25... with self-hard-code
+float XX (float x){
+//float res = x;
+//    for (int i = 0; i < x; i++){
+//        res *= x;
+//    }
+return pow(x, x);
+}
+
 int main(int argc, char* argv[]){
 	system("color 78");
 	float a, b;

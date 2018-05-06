@@ -53,11 +53,9 @@ void display(){
         drawBoard();
         drawCheckers();
     }
-
-    if(r == 0)
+    else if(r == 0)
         Winner(BLUE_TEAM);
-
-    if (b == 0)
+    else if (b == 0)
         Winner(RED_TEAM);
 
     glutSwapBuffers();
